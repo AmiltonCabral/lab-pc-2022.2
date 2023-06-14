@@ -1,10 +1,11 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
-	"io"
 	"log"
 	"net"
+	"time"
 )
 
 const (
@@ -13,37 +14,52 @@ const (
 	CONN_TYPE = "tcp"
 )
 
+type Request struct {
+	msg  string
+	conn net.Conn
+}
+
 func main() {
-	ln, err := net.Listen(CONN_TYPE, CONN_HOST+":"+CONN_PORT)
+	requests := make(chan Request)
+	go generateResponses(requests)
+
+	listener, err := net.Listen(CONN_TYPE, CONN_HOST+":"+CONN_PORT)
 	if err != nil {
 		log.Fatal("Error listening:", err.Error())
 	}
-	defer ln.Close()
+
+	defer listener.Close()
 	fmt.Println("Listening on " + CONN_HOST + ":" + CONN_PORT)
 
 	for {
-		conn, err := ln.Accept()
+		conn, err := listener.Accept()
 		if err != nil {
 			log.Print("Error accepting: ", err.Error())
 			continue
 		}
-		go handleConn(conn)
+
+		go reader(conn, requests)
 	}
 }
 
-func handleConn(conn net.Conn) {
-	defer conn.Close()
-
-	buf, read_err := io.ReadAll(conn)
-	if read_err != nil {
-		fmt.Println("Failed:", read_err)
-		return
+func reader(conn net.Conn, requests chan Request) {
+	reader := bufio.NewReader(conn)
+	for {
+		msg, err := reader.ReadString('\n')
+		if err != nil {
+			fmt.Printf("Client disconnected.\n")
+			break
+		}
+		requests <- Request{msg, conn}
 	}
-	fmt.Println("Got: ", string(buf))
+}
 
-	_, write_err := io.WriteString(conn, "Message received.\n")
-	if write_err != nil {
-		fmt.Println("Failed:", write_err)
-		return
+func generateResponses(requests chan Request) {
+	for {
+		request := <-requests
+
+		time.Sleep(3 * time.Second)
+
+		request.conn.Write([]byte("Server got: " + request.msg))
 	}
 }

@@ -1,10 +1,11 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
-	"io"
 	"net"
 	"os"
+	"time"
 )
 
 const (
@@ -16,28 +17,42 @@ const (
 func main() {
 	conn, err := net.Dial(CONN_TYPE, CONN_HOST+":"+CONN_PORT)
 	if err != nil {
-		fmt.Println(err)
+		fmt.Println("Error dialing:", err.Error())
 		os.Exit(1)
 	}
 	fmt.Println("Dialing on " + CONN_HOST + ":" + CONN_PORT)
 
-	ReadNWrite(conn)
+	handleConn(conn)
 	conn.Close()
 }
 
-func ReadNWrite(conn net.Conn) {
-	message := "Test Request\n"
-	_, write_err := io.WriteString(conn, message)
-	if write_err != nil {
-		fmt.Println("failed:", write_err)
-		return
-	}
-	conn.(*net.TCPConn).CloseWrite()
+func handleConn(conn net.Conn) {
+	outPutCh := make(chan string) // outgoing client messages
+	go reader(conn)
+	go writer(conn, outPutCh)
 
-	buf, read_err := io.ReadAll(conn)
-	if read_err != nil {
-		fmt.Println("failed:", read_err)
-		return
+	me := conn.LocalAddr().String()
+	for {
+		outPutCh <- me + ": oi"
+		time.Sleep(3 * time.Second)
 	}
-	fmt.Println("Got: ", string(buf))
+
+}
+
+func reader(conn net.Conn) {
+	reader := bufio.NewReader(conn)
+	for {
+		msg, err := reader.ReadString('\n')
+		if err != nil {
+			fmt.Println("Error reading" + err.Error())
+			break
+		}
+		fmt.Println(msg)
+	}
+}
+
+func writer(conn net.Conn, outPutCh chan string) {
+	for msg := range outPutCh {
+		fmt.Fprintln(conn, msg) // NOTE: ignoring network errors
+	}
 }
