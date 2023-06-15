@@ -1,11 +1,10 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
+	"io"
 	"log"
 	"net"
-	"time"
 )
 
 const (
@@ -39,27 +38,32 @@ func main() {
 		}
 
 		go reader(conn, requests)
+		fmt.Println("cliente conectado")
+
 	}
 }
 
 func reader(conn net.Conn, requests chan Request) {
-	reader := bufio.NewReader(conn)
+	//input := bufio.NewScanner(conn)
 	for {
-		msg, err := reader.ReadString('\n')
-		if err != nil {
-			fmt.Printf("Client disconnected.\n")
-			break
-		}
-		requests <- Request{msg, conn}
+		//fmt.Printf(input.Text())
+		// msg, err := reader.ReadString('\n')
+		// if err != nil {
+		// 	)
+		// 	break
+		// }
+		requests <- Request{"sadasdsa", conn}
 	}
+	//fmt.Printf("Client disconnected.\n")
 }
 
 func generateResponses(requests chan Request) {
 	for {
 		request := <-requests
 
-		time.Sleep(3 * time.Second)
-
-		request.conn.Write([]byte("Server got: " + request.msg))
+		_, err := io.WriteString(request.conn, "request.msg")
+		if err != nil {
+			continue
+		}
 	}
 }
