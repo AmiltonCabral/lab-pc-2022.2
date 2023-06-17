@@ -54,7 +54,8 @@ func handleConn(conn net.Conn, requests chan<- Request) {
 		requests <- Request{input.Text(), clientCh}
 	}
 
-	//close(clientCh)
+	//checar se o canal do cliente está fechado antes de escrever nele
+	close(clientCh)
 	conn.Close()
 	fmt.Printf("Client disconnected.\n")
 }
