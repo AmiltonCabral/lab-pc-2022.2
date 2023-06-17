@@ -1,10 +1,13 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
 	"io"
 	"log"
+	"math/rand"
 	"net"
+	"time"
 )
 
 const (
@@ -14,8 +17,8 @@ const (
 )
 
 type Request struct {
-	msg  string
-	conn net.Conn
+	msg      string
+	clientCh chan string
 }
 
 func main() {
@@ -26,8 +29,8 @@ func main() {
 	if err != nil {
 		log.Fatal("Error listening:", err.Error())
 	}
-
 	defer listener.Close()
+
 	fmt.Println("Listening on " + CONN_HOST + ":" + CONN_PORT)
 
 	for {
@@ -37,33 +40,64 @@ func main() {
 			continue
 		}
 
-		go reader(conn, requests)
-		fmt.Println("cliente conectado")
-
+		go handleConn(conn, requests)
+		fmt.Println("New client connected")
 	}
 }
 
-func reader(conn net.Conn, requests chan Request) {
-	//input := bufio.NewScanner(conn)
-	for {
-		//fmt.Printf(input.Text())
-		// msg, err := reader.ReadString('\n')
-		// if err != nil {
-		// 	)
-		// 	break
-		// }
-		requests <- Request{"sadasdsa", conn}
+func handleConn(conn net.Conn, requests chan<- Request) {
+	clientCh := make(chan string, 10)
+	go clientWriter(conn, clientCh)
+
+	input := bufio.NewScanner(conn)
+	for input.Scan() {
+		requests <- Request{input.Text(), clientCh}
 	}
-	//fmt.Printf("Client disconnected.\n")
+
+	//close(clientCh)
+	conn.Close()
+	fmt.Printf("Client disconnected.\n")
 }
 
-func generateResponses(requests chan Request) {
-	for {
-		request := <-requests
-
-		_, err := io.WriteString(request.conn, "request.msg")
+func clientWriter(conn net.Conn, clientCh <-chan string) {
+	for response := range clientCh {
+		_, err := io.WriteString(conn, response)
 		if err != nil {
+			log.Print("Error writing: ", err.Error())
 			continue
 		}
 	}
+}
+
+func generateResponses(requests <-chan Request) {
+	for request := range requests {
+		switch request.msg {
+		case "text":
+			go getText(request.clientCh)
+		case "image":
+			go getImage(request.clientCh)
+		case "video":
+			go getVideo(request.clientCh)
+		}
+	}
+}
+
+func getText(clientCh chan<- string) {
+	simulateWork(1, 5)
+	clientCh <- "this is a text\n"
+}
+
+func getImage(clientCh chan<- string) {
+	simulateWork(10, 15)
+	clientCh <- "this is an image\n"
+}
+
+func getVideo(clientCh chan<- string) {
+	simulateWork(20, 30)
+	clientCh <- "this is a video\n"
+}
+
+func simulateWork(min int, max int) {
+	num := rand.Intn(max-min) + min
+	time.Sleep(time.Duration(num) * time.Second)
 }

@@ -31,23 +31,20 @@ func handleConn(conn net.Conn) {
 	go reader(conn)
 	go writer(conn, outPutCh)
 
-	me := conn.LocalAddr().String()
 	for {
-		outPutCh <- me + ": oi"
-		time.Sleep(3 * time.Second)
+		outPutCh <- "image"
+		outPutCh <- "video"
+		time.Sleep(20 * time.Second)
+		outPutCh <- "image"
+		outPutCh <- "text"
+		time.Sleep(30 * time.Second)
 	}
-
 }
 
 func reader(conn net.Conn) {
-	reader := bufio.NewReader(conn)
-	for {
-		msg, err := reader.ReadString('\n')
-		if err != nil {
-			fmt.Println("Error reading" + err.Error())
-			break
-		}
-		fmt.Println(msg)
+	input := bufio.NewScanner(conn)
+	for input.Scan() {
+		fmt.Println(input.Text())
 	}
 }
 
