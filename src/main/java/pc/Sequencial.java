@@ -16,6 +16,7 @@ public class Sequencial {
     long startTime = System.nanoTime();
     ArrayList<String> actorIds = FileIOUtil.readFile(ACTORS_DATA_PATH, NUMBER_OF_ACTORS);
     Actor[] actorsArr = new Actor[10];
+    int actorsCount = 0;
 
     for (String actorId : actorIds) {
       Actor actor = CineLsdDatabaseService.requestActor(actorId);
@@ -38,13 +39,16 @@ public class Sequencial {
       if (actorsArr[9] == null || actor.getRating() > actorsArr[9].getRating()) {
         ActorUtil.sortInsertion(actorsArr, actor);
       }
+
+      System.out.println("Actors processed: " + ++actorsCount + " / " + NUMBER_OF_ACTORS);
     }
 
+    System.out.println("\n--------------------------------------------------\n");
     for (Actor actor : actorsArr) {
       System.out.println(actor);
     }
 
-    System.out.println("\n--------------------------------------------------" +
+    System.out.println("\n--------------------------------------------------\n" +
         "\nTotal execution time in millis: " + ((System.nanoTime() - startTime) / 1000000));
   }
 }
