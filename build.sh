@@ -1,6 +1,6 @@
 #!/bin/sh
 
-mvn clean package
+mvn clean compile assembly:single
 
 if [ $? -eq 0 ]
 then
