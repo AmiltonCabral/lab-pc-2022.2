@@ -11,7 +11,7 @@ public class Actor {
   private float rating;
 
   public String getId() {
-    return id; 
+    return id;
   }
 
   public String getName() {
@@ -33,9 +33,10 @@ public class Actor {
   @Override
   public String toString() {
     return "Actor: { " +
-            "id: '" + id + '\'' +
-            ", name: '" + name + '\'' +
-            ", movies: " + movies +
-            " }";
+        "id: '" + id + '\'' +
+        ", name: '" + name + '\'' +
+        ", movies: " + movies +
+        ", rating: " + rating +
+        " }";
   }
 }
