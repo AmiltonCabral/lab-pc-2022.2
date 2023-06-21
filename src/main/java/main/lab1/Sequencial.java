@@ -6,10 +6,11 @@ import main.lab1.DTOs.Actor;
 import main.lab1.DTOs.Movie;
 import main.lab1.services.CineLsdDatabaseService;
 import main.lab1.utils.FileIOUtil;
+import main.lab1.utils.ActorUtil;
 
-public class App {
+public class Sequencial {
   private static String ACTORS_DATA_PATH = "./data/actors.txt";
-  private static int NUMBER_OF_ACTORS = 20;
+  private static int NUMBER_OF_ACTORS = 100;
 
   public static void main(String[] args) throws InterruptedException {
     long startTime = System.nanoTime();
@@ -35,31 +36,15 @@ public class App {
       actor.setRating(totalRating / actor.getMovies().size());
 
       if (actorsArr[9] == null || actor.getRating() > actorsArr[9].getRating()) {
-        sortInsertion(actorsArr, actor);
+        ActorUtil.sortInsertion(actorsArr, actor);
       }
     }
 
     for (Actor actor : actorsArr) {
-      if (actor != null) {
-        System.out.println(actor);
-      }
+      System.out.println(actor);
     }
 
     System.out.println("\n--------------------------------------------------" +
         "\nTotal execution time in millis: " + ((System.nanoTime() - startTime) / 1000000));
   }
-
-  public static void sortInsertion(Actor[] Actors, Actor newActor) {
-    Actors[9] = newActor;
-
-    int j = Actors.length - 1;
-
-    while (j > 0 && (Actors[j - 1] == null || Actors[j].getRating() > Actors[j - 1].getRating())) {
-      Actor aux = Actors[j];
-      Actors[j] = Actors[j - 1];
-      Actors[j - 1] = aux;
-      j -= 1;
-    }
-  }
-
 }
