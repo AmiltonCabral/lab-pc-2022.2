@@ -1,13 +1,18 @@
 # Projeto Programação Concorrente 2022.2
 
-Projeto Programação Concorrente, implementando um protocolo HTTP/2 em golang.
-
+ realizando a reimplementação do projeto utilizando a linguagem de programação Java.
+ 
 [Código base](https://github.com/pedrohenrique-ql/concorrente-lab-base).
 
-## ⚙️ Requisitos
+## ⚙️ Pré-requisitos
 
 - [Java 11+](https://www.oracle.com/br/java/technologies/javase/jdk11-archive-downloads.html)
 - [Maven](https://maven.apache.org/)
+
+## ✒️ Autores
+  **Amilton Cristian** - *Desenvolvedor especializado em programação sequencial.* - [AmiltonCabral](https://github.com/AmiltonCabral)
+  **Iago Silva** - *Desenvolvedor especializado em programação concorrente.* - [Iagohss](https://github.com/Iagohss)
+  **Joab Cesar** - *Responsável por testes, processamento e desenvolvimento auxiliar.* - [Joabcmp](https://github.com/joabcmp)
 
 ## 🔍 Funções auxiliares
 
