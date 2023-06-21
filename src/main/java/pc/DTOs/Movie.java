@@ -1,4 +1,4 @@
-package main.lab1.DTOs;
+package pc.DTOs;
 
 import java.util.ArrayList;
 
@@ -14,7 +14,7 @@ public class Movie {
   public String getId() {
     return id;
   }
-  
+
   public String getTitle() {
     return title;
   }
@@ -42,13 +42,13 @@ public class Movie {
   @Override
   public String toString() {
     return "Movie: { " +
-            "id: '" + id + '\'' +
-            ", title: '" + title + '\'' +
-            ", averageRating: " + averageRating +
-            ", numberOfVotes: " + numberOfVotes +
-            ", startYear: " + startYear +
-            ", lengthInMinutes: " + lengthInMinutes +
-            ", genres: " + genres +
-            " }";
+        "id: '" + id + '\'' +
+        ", title: '" + title + '\'' +
+        ", averageRating: " + averageRating +
+        ", numberOfVotes: " + numberOfVotes +
+        ", startYear: " + startYear +
+        ", lengthInMinutes: " + lengthInMinutes +
+        ", genres: " + genres +
+        " }";
   }
 }

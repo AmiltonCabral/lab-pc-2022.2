@@ -4,14 +4,14 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>org.example</groupId>
-  <artifactId>PC-Lab1</artifactId>
+  <groupId>pc</groupId>
+  <artifactId>Proj-PC</artifactId>
   <version>1.0-SNAPSHOT</version>
 
   <name>PC-Lab1</name>
   <description>A simple PC-Lab1.</description>
   <!-- FIXME change it to the project's website -->
-  <url>http://www.example.com</url>
+  <url>https://github.com/AmiltonCabral/projeto-pc-2022.2</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

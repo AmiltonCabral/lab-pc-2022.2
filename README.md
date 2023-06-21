@@ -7,6 +7,7 @@ Projeto Programação Concorrente, implementando um protocolo HTTP/2 em golang.
 ## ⚙️ Requisitos
 
 - [Java 11+](https://www.oracle.com/br/java/technologies/javase/jdk11-archive-downloads.html)
+- [Maven](https://maven.apache.org/)
 
 ## 🔍 Funções auxiliares
 

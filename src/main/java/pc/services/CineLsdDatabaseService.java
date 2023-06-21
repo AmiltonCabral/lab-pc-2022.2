@@ -1,8 +1,9 @@
-package main.lab1.services;
+package pc.services;
 
 import com.google.gson.Gson;
-import main.lab1.DTOs.Actor;
-import main.lab1.DTOs.Movie;
+
+import pc.DTOs.Actor;
+import pc.DTOs.Movie;
 
 import java.io.*;
 import java.net.URI;
@@ -15,7 +16,7 @@ public class CineLsdDatabaseService {
   private static String BASE_URL = "http://150.165.15.91:8001";
   private static String ACTORS_PREFIX = "/actors";
   private static String MOVIES_PREFIX = "/movies";
-  
+
   public static Actor requestActor(String actorId) {
     try {
       String url = BASE_URL + ACTORS_PREFIX + "/" + actorId;
@@ -43,10 +44,10 @@ public class CineLsdDatabaseService {
       HttpRequest request = HttpRequest.newBuilder().uri(new URI(url)).build();
       HttpClient httpClient = HttpClient.newHttpClient();
       HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
-  
+
       Gson gson = new Gson();
       Movie movie = gson.fromJson(response.body(), Movie.class);
-  
+
       return movie;
     } catch (URISyntaxException e) {
       throw new RuntimeException(e);

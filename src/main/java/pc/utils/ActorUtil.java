@@ -1,6 +1,6 @@
-package main.lab1.utils;
+package pc.utils;
 
-import main.lab1.DTOs.Actor;
+import pc.DTOs.Actor;
 
 public class ActorUtil {
     public static void sortInsertion(Actor[] Actors, Actor newActor) {

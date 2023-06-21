@@ -1,12 +1,12 @@
-package main.lab1;
+package pc;
 
 import java.util.ArrayList;
 
-import main.lab1.DTOs.Actor;
-import main.lab1.DTOs.Movie;
-import main.lab1.services.CineLsdDatabaseService;
-import main.lab1.utils.FileIOUtil;
-import main.lab1.utils.ActorUtil;
+import pc.DTOs.Actor;
+import pc.DTOs.Movie;
+import pc.services.CineLsdDatabaseService;
+import pc.utils.ActorUtil;
+import pc.utils.FileIOUtil;
 
 public class Sequencial {
   private static String ACTORS_DATA_PATH = "./data/actors.txt";

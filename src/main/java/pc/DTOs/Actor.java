@@ -1,4 +1,4 @@
-package main.lab1.DTOs;
+package pc.DTOs;
 
 import java.util.ArrayList;
 
