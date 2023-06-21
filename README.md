@@ -10,9 +10,9 @@
 - [Maven](https://maven.apache.org/)
 
 ## ✒️ Autores
-  **Amilton Cristian** - *Desenvolvedor especializado em programação sequencial.* - [AmiltonCabral](https://github.com/AmiltonCabral)
-  **Iago Silva** - *Desenvolvedor especializado em programação concorrente.* - [Iagohss](https://github.com/Iagohss)
-  **Joab Cesar** - *Responsável por testes, processamento e desenvolvimento auxiliar.* - [Joabcmp](https://github.com/joabcmp)
+*  **Amilton Cristian** - *Desenvolvedor especializado em programação sequencial.* - [AmiltonCabral](https://github.com/AmiltonCabral)
+*  **Iago Silva** - *Desenvolvedor especializado em programação concorrente.* - [Iagohss](https://github.com/Iagohss)
+*  **Joab Cesar** - *Responsável por testes, processamento e desenvolvimento auxiliar.* - [Joabcmp](https://github.com/joabcmp)
 
 ## 🔍 Funções auxiliares
 
