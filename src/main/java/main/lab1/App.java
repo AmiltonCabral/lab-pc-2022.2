@@ -9,22 +9,34 @@ import main.lab1.utils.FileIOUtil;
 
 public class App {
   private static String ACTORS_DATA_PATH = "./data/actors.txt";
-  private static int NUMBER_OF_ACTORS = 1000;
-  
+  private static int NUMBER_OF_ACTORS = 10;
+
   public static void main(String[] args) throws InterruptedException {
     long startTime = System.nanoTime();
-    
-    Actor actor = CineLsdDatabaseService.requestActor("nm1179580");
-    System.out.println(actor);
-    
-    Movie movie = CineLsdDatabaseService.requestMovie("tt7825208");
-    System.out.println(movie);
-    
     ArrayList<String> actorIds = FileIOUtil.readFile(ACTORS_DATA_PATH, NUMBER_OF_ACTORS);
-    System.out.println(actorIds);
-    
-    System.out.println("\n--------------------------------------------------" +
-      "\nTotal execution time in millis: " + ((System.nanoTime() - startTime)/1000000));
-    }
-}
 
+    for (String actorId : actorIds) {
+      Actor actor = CineLsdDatabaseService.requestActor(actorId);
+      if (actor == null || actor.getMovies().size() <= 0) {
+        continue;
+      }
+
+      int totalRating = 0;
+
+      for (String movieId : actor.getMovies()) {
+        Movie movie = CineLsdDatabaseService.requestMovie(movieId);
+
+        if (movie != null) {
+          totalRating += movie.getAverageRating();
+        }
+      }
+
+      actor.setRating(totalRating / actor.getMovies().size());
+    }
+
+    System.out.println(actorIds.size());
+
+    System.out.println("\n--------------------------------------------------" +
+        "\nTotal execution time in millis: " + ((System.nanoTime() - startTime) / 1000000));
+  }
+}
