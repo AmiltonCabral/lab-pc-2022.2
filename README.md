@@ -6,8 +6,8 @@
 
 ## ⚙️ Pré-requisitos
 
-- [Java 11+](https://www.oracle.com/br/java/technologies/javase/jdk11-archive-downloads.html)
-- [Maven](https://maven.apache.org/)
+- [Java 11+](https://www.oracle.com/br/java/technologies/javase/jdk11-archive-downloads.html) - Linguagem de implementação
+- [Maven](https://maven.apache.org/) - Gerente de Dependência
 
 ## ✒️ Autores
 *  **Amilton Cristian** - *Desenvolvedor especializado em programação sequencial.* - [AmiltonCabral](https://github.com/AmiltonCabral)
