@@ -1,7 +1,7 @@
 # Laboratório Programação Concorrente 2022.2
 
-reimplementação do projeto modificando a linguagem de programação para Java.
-[projeto original](https://github.com/Iagohss/projeto-pc-2022.2.git).
+Laboratório para implementação do CineLsd na linguagem Java, com foco na diferenciação da eficiencia entre o uso de threads sequenciais e concorrentes 
+[Código base](https://github.com/pedrohenrique-ql/concorrente-lab-base).
 
 ## 🛠️ Construído com
 
