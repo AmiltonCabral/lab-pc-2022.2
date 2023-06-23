@@ -10,7 +10,7 @@ import pc.utils.FileIOUtil;
 
 public class Sequencial {
   private static String ACTORS_DATA_PATH = "./data/actors.txt";
-  private static int NUMBER_OF_ACTORS = 100;
+  private static int NUMBER_OF_ACTORS = 10000;
 
   public static void main(String[] args) throws InterruptedException {
     long startTime = System.nanoTime();
