@@ -1,7 +1,7 @@
-# Projeto Programação Concorrente 2022.2
+# Laboratório Programação Concorrente 2022.2
 
- realizando a reimplementação do projeto utilizando a linguagem de programação Java.
- 
+reimplementação do projeto modificando a linguagem de programação para Java.
+[projeto](https://github.com/Iagohss/projeto-pc-2022.2.git).
 [Código base](https://github.com/pedrohenrique-ql/concorrente-lab-base).
 
 ## ⚙️ Pré-requisitos
