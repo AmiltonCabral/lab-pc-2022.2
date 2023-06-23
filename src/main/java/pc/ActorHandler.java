@@ -20,21 +20,20 @@ public class ActorHandler implements Runnable{
 
     @Override
     public void run(){
-        Actor actor = CineLsdDatabaseService.requestActor(this.actorId);
-        if (actor != null && actor.getMovies().size() > 0) {
-        	float totalRating = 0;
+      Actor actor = CineLsdDatabaseService.requestActor(this.actorId);
+      if (actor != null && actor.getMovies().size() > 0) {
+        float totalRating = 0;
+        for (String movieId : actor.getMovies()) {
+          Movie movie = CineLsdDatabaseService.requestMovie(movieId);
 
-            for (String movieId : actor.getMovies()) {
-            Movie movie = CineLsdDatabaseService.requestMovie(movieId);
-
-            if (movie != null) {
-              totalRating += movie.getAverageRating();
-            }
-            
-            actor.setRating(totalRating / actor.getMovies().size());
-            actorsQueue.add(actor);
+          if (movie != null) {
+            totalRating += movie.getAverageRating();
+          }
         }
-        latch.countDown();
-      }      
+        
+        actor.setRating(totalRating / actor.getMovies().size());
+        actorsQueue.add(actor);
+      }
+      latch.countDown();
     }
 }

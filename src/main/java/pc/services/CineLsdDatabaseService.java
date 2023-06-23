@@ -1,27 +1,27 @@
 package pc.services;
 
-import com.google.gson.Gson;
-
-import pc.DTOs.Actor;
-import pc.DTOs.Movie;
-
-import java.io.*;
+import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
+import com.google.gson.Gson;
+
+import pc.DTOs.Actor;
+import pc.DTOs.Movie;
+
 public class CineLsdDatabaseService {
   private static String BASE_URL = "http://150.165.15.91:8001";
   private static String ACTORS_PREFIX = "/actors";
   private static String MOVIES_PREFIX = "/movies";
+  private static HttpClient httpClient = HttpClient.newHttpClient();
 
   public static Actor requestActor(String actorId) {
     try {
       String url = BASE_URL + ACTORS_PREFIX + "/" + actorId;
       HttpRequest request = HttpRequest.newBuilder().uri(new URI(url)).build();
-      HttpClient httpClient = HttpClient.newHttpClient();
       HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
 
       Gson gson = new Gson();
@@ -42,7 +42,6 @@ public class CineLsdDatabaseService {
     try {
       String url = BASE_URL + MOVIES_PREFIX + "/" + movieId;
       HttpRequest request = HttpRequest.newBuilder().uri(new URI(url)).build();
-      HttpClient httpClient = HttpClient.newHttpClient();
       HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
 
       Gson gson = new Gson();

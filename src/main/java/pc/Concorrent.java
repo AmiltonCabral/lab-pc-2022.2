@@ -16,7 +16,7 @@ import pc.utils.FileIOUtil;
 
 public class Concorrent {
     private static String ACTORS_DATA_PATH = "./data/actors.txt";
-    private static int NUMBER_OF_ACTORS = 1000;
+    private static int NUMBER_OF_ACTORS = 3000;
 
     public static void main(String[] args) throws InterruptedException, ExecutionException {
         long startTime = System.nanoTime();
@@ -27,7 +27,7 @@ public class Concorrent {
         AtomicBoolean allActoresProcessed = new AtomicBoolean(false);
 
         Queue<Actor> actorsQueue = new ConcurrentLinkedQueue<>();
-        Callable<String> rankingHandler = new RankingHandler(actorsQueue, allActoresProcessed);
+        Callable<String> rankingHandler = new RankingHandler(actorsQueue, allActoresProcessed, NUMBER_OF_ACTORS);
         Future<String> ranking = executor.submit(rankingHandler);
 
         for (String actorId : actorIds) {
