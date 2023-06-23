@@ -4,7 +4,7 @@ reimplementação do projeto modificando a linguagem de programação para Java.
 [projeto](https://github.com/Iagohss/projeto-pc-2022.2.git).
 [Código base](https://github.com/pedrohenrique-ql/concorrente-lab-base).
 
-## ⚙️ Pré-requisitos
+## 🛠️ Construído com
 
 - [Java 11+](https://www.oracle.com/br/java/technologies/javase/jdk11-archive-downloads.html) - Linguagem de implementação
 - [Maven](https://maven.apache.org/) - Gerente de Dependência
