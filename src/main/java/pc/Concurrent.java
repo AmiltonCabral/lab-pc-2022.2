@@ -14,9 +14,9 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import pc.DTOs.Actor;
 import pc.utils.FileIOUtil;
 
-public class Concorrent {
+public class Concurrent {
     private static String ACTORS_DATA_PATH = "./data/actors.txt";
-    private static int NUMBER_OF_ACTORS = 3000;
+    private static int NUMBER_OF_ACTORS = 10000;
 
     public static void main(String[] args) throws InterruptedException, ExecutionException {
         long startTime = System.nanoTime();
@@ -34,13 +34,13 @@ public class Concorrent {
             Runnable actorHandler = new ActorHandler(actorId, actorsQueue, latch);
             executor.execute(actorHandler);
         }
-        
+
         latch.await();
         allActoresProcessed.set(true);
-        
 
         System.out.println(ranking.get());
+        executor.shutdown();
         System.out.println("\n--------------------------------------------------\n" +
-            "\nTotal execution time in millis: " + ((System.nanoTime() - startTime) / 1000000));
+                "\nTotal execution time in millis: " + ((System.nanoTime() - startTime) / 1000000));
     }
 }
