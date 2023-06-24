@@ -12,7 +12,8 @@ Laboratório para implementação do CineLsd na linguagem Java, com foco na dife
 *  **Amilton Cristian** - *Desenvolvedor especializado em programação sequencial.* - [AmiltonCabral](https://github.com/AmiltonCabral)
 *  **Iago Silva** - *Desenvolvedor especializado em programação concorrente.* - [Iagohss](https://github.com/Iagohss)
 *  **Joab Cesar** - *Responsável por testes, processamento e desenvolvimento auxiliar.* - [Joabcmp](https://github.com/joabcmp)
-  embora o desenvolvimento do projeto foi dividido igualmente estando todos presentes em reuniões sincronas de forma online.
+
+  Embora o desenvolvimento do projeto foi dividido igualmente estando todos presentes em reuniões sincronas de forma online.
 
 ### 🍷🗿 Estrategias adotadas
 - A estratégia principal de concorrência é o uso de threads para processar atores em paralelo. O programa cria um pool de threads executoras usando ExecutorService executor = Executors.newCachedThreadPool();. O programa utiliza um padrão de tarefa dividida em duas partes: ActorHandler e RankingHandler. A classe ActorHandler implementa a interface Runnable e é responsável por processar um ator específico. A classe RankingHandler implementa a interface Callable<String> e é responsável por calcular o ranking geral com base nas classificações dos atores processados.
