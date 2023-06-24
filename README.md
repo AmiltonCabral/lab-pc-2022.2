@@ -13,6 +13,15 @@ Laboratório para implementação do CineLsd na linguagem Java, com foco na dife
 *  **Iago Silva** - *Desenvolvedor especializado em programação concorrente.* - [Iagohss](https://github.com/Iagohss)
 *  **Joab Cesar** - *Responsável por testes, processamento e desenvolvimento auxiliar.* - [Joabcmp](https://github.com/joabcmp)
 
+### 🍷🗿 Estrategias adotadas
+- A estratégia principal de concorrência é o uso de threads para processar atores em paralelo. O programa cria um pool de threads executoras usando ExecutorService executor = Executors.newCachedThreadPool();. O programa utiliza um padrão de tarefa dividida em duas partes: ActorHandler e RankingHandler. A classe ActorHandler implementa a interface Runnable e é responsável por processar um ator específico. A classe RankingHandler implementa a interface Callable<String> e é responsável por calcular o ranking geral com base nas classificações dos atores processados.
+
+- O programa utiliza uma fila compartilhada do tipo ConcurrentLinkedQueue<Actor> chamada actorsQueue para armazenar os atores processados pelos ActorHandlers.quando finaliza o processamento do ator o coloca em uma fila onde a thread rankingHandler intera, extraindo os dados para colocar no ranking, essa fila é thread-safe e permite que vários threads acessem e modifiquem a estrutura de dados sem causar condições de corrida.
+
+- Para coordenar a execução dos threads e garantir que o programa principal aguarde a conclusão de todas as tarefas, é utilizado o CountDownLatch. O CountDownLatch latch é inicializado com o número de atores a serem processados (NUMBER_OF_ACTORS). Cada instância de ActorHandler chama o método latch.countDown() ao finalizar o processamento de um ator, indicando que a tarefa foi concluída. O programa principal chama latch.await() para aguardar até que todas as tarefas sejam concluídas antes de prosseguir.
+
+- O programa também utiliza Callable<String> e Future<String> para lidar com a tarefa de cálculo do ranking. A instância de RankingHandler é submetida ao ExecutorService por meio do método executor.submit(rankingHandler), retornando um Future<String>. O Future<String> é usado para obter o resultado da tarefa de cálculo do ranking por meio do método ranking.get(). Essa abordagem permite que o programa principal aguarde a conclusão da tarefa de cálculo do ranking e obtenha seu resultado.
+
 ## 🔍 Funções auxiliares
 
 Esse código fornece funções auxiliares para facilitar o desenvolvimento do projeto:
