@@ -74,3 +74,10 @@ Esse código fornece funções auxiliares para facilitar o desenvolvimento do pr
     ]
   }
   ```
+  
+## ⚙️ Demonstração de possiveis resultados
+*sequencial.java*
+[image](https://github.com/AmiltonCabral/lab-pc-2022.2/assets/72311157/dbf8800d-51cf-43d7-b416-66c61cf3c5a3)
+
+*Concorrent.java*
+[image](https://github.com/AmiltonCabral/lab-pc-2022.2/assets/72311157/3a65b120-f5f0-4ecf-99ce-0c15c6aadcb7)
