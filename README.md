@@ -77,7 +77,9 @@ Esse código fornece funções auxiliares para facilitar o desenvolvimento do pr
   
 ## ⚙️ Demonstração de possiveis resultados
 *sequencial.java*
+
 ![image](https://github.com/AmiltonCabral/lab-pc-2022.2/assets/72311157/7d215ecd-9a49-41c0-a39c-3e40b9ab8231)
 
 *Concorrent.java*
+
 ![WhatsApp Image 2023-06-23 at 20 46 01 (2)](https://github.com/AmiltonCabral/lab-pc-2022.2/assets/72311157/fbf83195-7ff8-4394-afc2-14fc7ded7466)
